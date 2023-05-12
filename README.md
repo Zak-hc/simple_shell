@@ -1,2 +1,2 @@
 # simple_shell
-TM
+TM>
