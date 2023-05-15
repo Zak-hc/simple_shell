@@ -12,7 +12,15 @@ void display_prompt() {
     write(STDOUT_FILENO, prompt, sizeof(prompt) - 1);
 }
 
-void execute_command(char *command) {
+void execute_command(char *command)
+{
+    char *token = strtok(command, " ");
+    while (token != NULL && i < MAX_ARGS - 1) {
+        args[i] = token;
+        i++;
+        token = strtok(NULL, " ");
+    }
+    args[i] = NULL;  
     pid_t pid = fork();
     if (pid < 0) {
         perror("fork");
