@@ -51,12 +51,10 @@ int main() {
 	if (command[i] != v[i])
 	break;
 	}
-	if (i == 5)
+	if (i == 4 && command[i] == '\0')
 	{
             break;
         }
-
-
         execute_command(command);
     }
 
