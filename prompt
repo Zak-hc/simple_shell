@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Fonction shell
+display_prompt() {
+    echo "Enter your command:"
+}
+
+# Appel de la fonction shell
+display_prompt
+
+# Appel d'un programme en langage C
+#gcc -o myprogram myprogram.c   # Compilation du programme C
+#./myprogram                   # Exécution du programme C
+
