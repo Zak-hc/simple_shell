@@ -1,10 +1,9 @@
-#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 #define MAX_COMMAND_LENGTH 100
 
 void display_prompt() {
@@ -18,11 +17,9 @@ void execute_command(char *command) {
         perror("fork");
         exit(EXIT_FAILURE);
     } else if (pid == 0) {
-        char *args[MAX_COMMAND_LENGTH / 2 + 1];
-        args[0] = command;
-        args[1] = NULL;
-        execv(command, args);
-        perror("execv");
+        char *args[] = {command, NULL};
+        execve(command, args, NULL);
+        perror("execve");
         exit(EXIT_FAILURE);
     } else {
         int status;
@@ -32,35 +29,23 @@ void execute_command(char *command) {
 
 int main() {
     char command[MAX_COMMAND_LENGTH];
-    int i, j;
-    char v[5] = "exit";
-    while (1) {            
+
+    while (1) {
         display_prompt();
 
         if (fgets(command, sizeof(command), stdin) == NULL) {
             write(STDOUT_FILENO, "\n", 1);
             break;
         }
-        for (i = 0; command[i] != '\0'; i++)
-	{}
-        if (command[i - 1] == '\n') {
-            command[i - 1] = '\0';
-        }
-        for (i = 0; command[i] != '\0'; i++, j++)
-	{
-	if (command[i] - v[j] != 0)
-	
-	break;
-	}
-	if (i != j)
-	{
-        printf("erreurr");
-        }
 
+        command[strcspn(command, "\n")] = '\0';  // Remove trailing newline
+
+        if (strcmp(command, "exit") == 0) {
+            break;
+        }
 
         execute_command(command);
     }
 
     return 0;
 }
-
