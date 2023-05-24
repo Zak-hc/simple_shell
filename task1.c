@@ -6,30 +6,49 @@
 #include <stdio.h>
 
 #define MAX_COMMAND_LENGTH 100
-
+#define MAX_ARGS 100
+extern char **environ;
 void display_prompt() {
     char prompt[] = "#cisfun$ ";
     write(STDOUT_FILENO, prompt, sizeof(prompt) - 1);
 }
 
 void execute_command(char *command)
-{
+{   int i;
+    char* envp[2] = {"PATH=/bin:/usr/bin", NULL};
+    char **env;
+    pid_t pid;
+    char *args[MAX_COMMAND_LENGTH / 2 + 1];
     char *token = strtok(command, " ");
+    i = 0;
     while (token != NULL && i < MAX_ARGS - 1) {
         args[i] = token;
         i++;
         token = strtok(NULL, " ");
     }
     args[i] = NULL;  
-    pid_t pid = fork();
+    pid = fork();
     if (pid < 0) {
         perror("fork");
         exit(EXIT_FAILURE);
-    } else if (pid == 0) {
-        char *args[MAX_COMMAND_LENGTH / 2 + 1];
+      
+    }
+    else if (strcmp(args[0], "env") == 0)
+    {
+        env = environ;
+        while (*env) {
+            size_t len = strlen(*env);
+            write(STDOUT_FILENO, *env, len);
+            write(STDOUT_FILENO, "\n", 1);
+            env++;
+        }
+        return;
+    }
+    
+    else if (pid == 0) {
         args[0] = command;
         args[1] = NULL;
-        execv(command, args);
+        execve(command, args, envp);
         perror("execv");
         exit(EXIT_FAILURE);
     } else {

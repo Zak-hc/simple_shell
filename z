@@ -1,4 +1,4 @@
 #!/bin/bash
 git add . 
-git commit  -m "see me"
+git commit  -m "tm"
 git push
