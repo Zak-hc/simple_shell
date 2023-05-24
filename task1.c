@@ -8,9 +8,11 @@
 #define MAX_COMMAND_LENGTH 100
 #define MAX_ARGS 100
 extern char **environ;
-void display_prompt() {
-    char prompt[] = "#cisfun$ ";
-    write(STDOUT_FILENO, prompt, sizeof(prompt) - 1);
+
+void display_prompt()
+{
+char prompt[] = "#cisfun$ ";
+write(STDOUT_FILENO, prompt, sizeof(prompt) - 1);
 }
 
 void execute_command(char *command)
@@ -57,7 +59,8 @@ void execute_command(char *command)
     }
 }
 
-int main() {
+int main()
+{
     char command[MAX_COMMAND_LENGTH];
     int i;
     char v[5] = "exit";
@@ -86,5 +89,4 @@ int main() {
     }
 
     return 0;
-}
 }
