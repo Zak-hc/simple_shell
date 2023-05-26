@@ -11,7 +11,7 @@
 */
 char *strtokk(char *str, const char *delim)
 {
-static char *buffer = NULL;
+static char *buffer;
 char *token_start;
 
 if (str != NULL)
@@ -21,7 +21,7 @@ buffer = str;
 
 if (buffer == NULL)
 {
-return NULL;
+return (NULL);
 }
 
 token_start = buffer;
@@ -32,6 +32,6 @@ if (buffer != NULL)
 *buffer++ = '\0';
 }
 
-return token_start;
+return (token_start);
 }
 
