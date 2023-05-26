@@ -33,7 +33,7 @@ fprintf(stderr, "Allocation error\n");
 exit(EXIT_FAILURE);
 }
 
-token = strtok(input, TOKEN_DELIMITERS);
+token = strtokk(input, TOKEN_DELIMITERS);
 while (token != NULL)
 {
 tokens[position] = token;
@@ -50,7 +50,7 @@ exit(EXIT_FAILURE);
 }
 }
 
-token = strtok(NULL, TOKEN_DELIMITERS);
+token = strtokk(NULL, TOKEN_DELIMITERS);
 }
 tokens[position] = NULL;
 return (tokens);
