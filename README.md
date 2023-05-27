@@ -1,2 +1,2 @@
 # simple_shell
-tTuM>
+tTiuM>
