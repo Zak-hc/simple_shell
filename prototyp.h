@@ -16,4 +16,5 @@ char **split_input(char *input);
 void shell_loop(void);
 int execute(char **args);
 char *strtokk(char *str, const char *delim);
+char *strtokk(char *str, const char *delim);
 #endif
